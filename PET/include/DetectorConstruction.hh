@@ -24,13 +24,7 @@ class DetectorConstruction : public G4VUserDetectorConstruction
     //G4VPhysicalVolume* worldPhys;
     G4VPhysicalVolume* ConstructWorld(); //metoda w której świat zostanie zbudowany
     void ConstructHumanFantom();
-    void ConstructCylinder();
-    void ConstructNaIDet();
-    G4LogicalVolume* ConstructAluLayer();
-    G4LogicalVolume* ConstructTeflonLayer();
-    G4LogicalVolume* ConstructSodiumCrystal();
-
-    
+    void ConstructCylinder();    
  
 };
 
