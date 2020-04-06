@@ -1,6 +1,3 @@
-//
-// $Id: DetectorConstruction.cc 12.16.2016 A. Fijalkowska $
-//
 /// \file DetectorConstruction.cc
 /// \brief DetectorConstruction class
 //
@@ -17,6 +14,8 @@
 #include "G4MultiFunctionalDetector.hh"
 #include "G4SDManager.hh"
 #include "G4PSEnergyDeposit.hh"
+
+#include "HumanFantom.hh"
 
 
 DetectorConstruction::DetectorConstruction()
@@ -72,52 +71,16 @@ G4VPhysicalVolume* DetectorConstruction::ConstructWorld()
 
 }
 
-G4Material* DetectorConstruction::MakeWater()
-{
-    G4Element* H = man->FindOrBuildElement("H");
-    G4Element* O = man->FindOrBuildElement("O");
-    G4Material* water = new G4Material("water", 1.0*g/cm3, 2);
-    water->AddElement(H, 2);
-    water->AddElement(O, 1);
-    return water;
-}
-
 void DetectorConstruction::ConstructHumanFantom()
 {   
-    G4double radiusMin = 0;
     G4double radiusMax = 15*cm;
     G4double length = 170*cm;
-    G4Tubs* fantomSolid = new G4Tubs("fantomSolid", radiusMin, radiusMax, length/2., 0*deg, 360*deg);
-    G4Material* water = MakeWater();
-    fantomLogVol = new G4LogicalVolume(fantomSolid, water, "fantomLogVol");
+    HumanFantom *fantom = new HumanFantom(length, radiusMax);
 
-     
-    G4VisAttributes* fantomVisAtt = new G4VisAttributes( G4Colour(1,0.8,0.8));
-	fantomVisAtt->SetForceAuxEdgeVisible(true);// Can see outline when drawn with lines
-	//fantomVisAtt->SetForceSolid(true);
-	fantomLogVol->SetVisAttributes(fantomVisAtt);
-
-	G4ThreeVector pos(0,0,0);    
-	new G4PVPlacement(0, pos, fantomLogVol, "fantom", worldLogic, 0, 0);
-}
-
-void DetectorConstruction::ConstructSpine()
-{
-    G4double radiusMin = 0;
-    G4double radiusMax = 3*cm;
-    G4double length = 85*cm;
-    G4Tubs* spineSolid = new G4Tubs("spineSolid", radiusMin, radiusMax, length/2., 0*deg, 360*deg);
-    G4Material* boneMat = man->FindOrBuildMaterial("G4_BONE_COMPACT_ICRU");
-    spineLogVol = new G4LogicalVolume(spineSolid, boneMat, "spineLogVol");
-    
-    G4VisAttributes* spineVisAtt = new G4VisAttributes(G4Colour(0.2, 0.8, 0.2));
-	spineVisAtt->SetForceAuxEdgeVisible(true);
-	spineVisAtt->SetForceSolid(true);
-	spineLogVol->SetVisAttributes(spineVisAtt); 
+	G4ThreeVector pos(0,0,0); 
+	G4RotationMatrix *pRot = new G4RotationMatrix();
+	fantom->Place(0, pos, "fantom", worldLogic, 0); 
 	
-	
-	G4ThreeVector pos(4*cm,0,length/2.);   
-    new G4PVPlacement(0, pos, spineLogVol, "spinePhys", fantomLogVol, 0, 0);
 }
 
 void DetectorConstruction::ConstructCylinder()
@@ -216,6 +179,20 @@ G4LogicalVolume* DetectorConstruction::ConstructTeflonLayer()
 
 G4LogicalVolume* DetectorConstruction::ConstructSodiumCrystal()
 {
+   G4double rMin = 0;
+   G4double rMax = 3. *cm;
+   G4double halfLength = 5. *cm; 
+   G4Tubs* crystal = new G4Tubs("crystal", rMin, rMax, halfLength, 0*deg, 360*deg);
+   
+   G4Material* nai = man->FindOrBuildMaterial("G4_SODIUM_IODIDE");
+
+   
+   G4LogicalVolume* naiLogic = new G4LogicalVolume(crystal, nai,"naiLogic");
+   G4VisAttributes* naiVis = new G4VisAttributes(G4Colour(1,1,0));
+   naiVis->SetForceSolid(true);
+   naiVis->SetForceAuxEdgeVisible(true);
+   naiLogic->SetVisAttributes(naiVis);
+   return naiLogic;
 }
 
 void DetectorConstruction::ConstructSDandField() 
