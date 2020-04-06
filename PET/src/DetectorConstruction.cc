@@ -43,11 +43,8 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
 {
     G4VPhysicalVolume* worldPhys = ConstructWorld();
     ConstructHumanFantom();
-    ConstructSpine();
     ConstructCylinder();
     ConstructNaIDet();
-    ConstructAluLayer();
-    ConstructTeflonLayer();
     return worldPhys;
 }
 
