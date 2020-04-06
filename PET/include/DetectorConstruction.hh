@@ -1,9 +1,3 @@
-// $Id: DetectorConstruction.hh 15.10.2018 A. Fijalkowska $
-//
-/// \file DetectorConstruction.hh
-/// \brief Kasa trzymająca geometrię detektora
-//
-//
 #ifndef DetectorConstruction_H
 #define DetectorConstruction_H 1
 
@@ -30,13 +24,11 @@ class DetectorConstruction : public G4VUserDetectorConstruction
     //G4VPhysicalVolume* worldPhys;
     G4VPhysicalVolume* ConstructWorld(); //metoda w której świat zostanie zbudowany
     void ConstructHumanFantom();
-    void ConstructSpine();
     void ConstructCylinder();
     void ConstructNaIDet();
     G4LogicalVolume* ConstructAluLayer();
     G4LogicalVolume* ConstructTeflonLayer();
     G4LogicalVolume* ConstructSodiumCrystal();
-    G4Material* MakeWater();
 
     
  
