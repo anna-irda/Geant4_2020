@@ -104,27 +104,21 @@ void DetectorConstruction::ConstructCylinder()
 //teflon 3 mm
 //aluminium 3 mm
 
-void DetectorConstruction::ConstructNaIDet()
+void DetectorConstruction::NaIDetector()
 {
-   G4LogicalVolume* aluLogic = ConstructAluLayer();
-   G4LogicalVolume* teflonLogic = ConstructTeflonLayer();   
-//   G4LogicalVolume* crystalLogic = ConstructSodiumCrystal();
-   G4ThreeVector pos(0,0,0); 
-   new G4PVPlacement(0, pos, teflonLogic, "teflonPhys", aluLogic, 0, 0);
+   G4double rMax1 = 3.6 *cm;
+   G4double rMax2 = 3.3 *cm;
+   G4double rMax3 = 3 *cm;
+   G4double halfLength1 = 5.6 *cm;
+   G4double halfLength2 = 5.3 *cm;
+   G4double halfLength3 = 5 *cm;
+   NaIDetector *detector = new NaIDetector(rMax1, rMax2, rMax3, halfLength1, halfLength2, halfLength3)
+
+   	G4RotationMatrix *pRot = new G4RotationMatrix();
+	detector->Place(0, pos, "detector", worldLogic, 0); 
+	
    double ringRadius = 46.6*cm;
-   
-//   G4ThreeVector naiDetPos(0, ringRadius, 0);
-//   G4RotationMatrix* rot = new G4RotationMatrix();
-//   rot->rotateX(90*deg);
-   new G4PVPlacement(rot, naiDetPos, aluLogic, "aluPhys", cylinderLogVol, 0, 0);
-   
-//   double angle=40*deg;
-//   G4ThreeVector naiDetPos2(ringRadius*sin(angle),ringRadius*cos(angle),0);
-//   G4RotationMatrix* rot2 = new G4RotationMatrix();
-//   rot2->rotateZ(angle);
-//   rot2->rotateX(90*deg);
-//   new G4PVPlacement(rot2, naiDetPos2, aluLogic, "aluPhys", cylinderLogVol, 0, 1);
-   
+	
    int noDetectors = 36;
    double angle = 360./noDetectors*deg;
    for(int i = 0; i !=36; ++i)
@@ -135,61 +129,6 @@ void DetectorConstruction::ConstructNaIDet()
        G4ThreeVector detPos(ringRadius*sin(angle*i),ringRadius*cos(angle*i),0);
        new G4PVPlacement(rot, detPos, aluLogic, "aluPhys", cylinderLogVol, 0, i);
    }
-}
-
-G4LogicalVolume* DetectorConstruction::ConstructAluLayer()
-{
-   G4double rMin = 0;
-   G4double rMax = 3.6 *cm;
-   G4double halfLength = 5.6 *cm; 
-   G4Tubs* aluSolid = new G4Tubs("aluSolid", rMin, rMax, halfLength, 0*deg, 360*deg);
-   
-   G4Material* alu = new G4Material("aluminum", 2.7*g/cm3, 1);
-   G4Element* Al = man->FindOrBuildElement("Al");
-   alu->AddElement(Al, 1);
-   
-   G4LogicalVolume* aluLogic = new G4LogicalVolume(aluSolid, alu,"aluLogic");
-   G4VisAttributes* aluVis = new G4VisAttributes(G4Colour(255./255,102./255.,0));
-   //aluVis->SetForceSolid(true);
-   aluVis->SetForceAuxEdgeVisible(true);
-   aluLogic->SetVisAttributes(aluVis);
-   return aluLogic;
-}
-
-G4LogicalVolume* DetectorConstruction::ConstructTeflonLayer()
-{
-   G4double rMin = 0;
-   G4double rMax = 3.3 *cm;
-   G4double halfLength = 5.3 *cm; 
-   G4Tubs* solid = new G4Tubs("solid", rMin, rMax, halfLength, 0*deg, 360*deg);
-   
-   G4Material* teflon = man->FindOrBuildMaterial("G4_TEFLON");
-
-   
-   G4LogicalVolume* teflonLogic = new G4LogicalVolume(solid, teflon,"teflonLogic");
-   G4VisAttributes* visAttr = new G4VisAttributes(G4Colour(1,1,1));
-   visAttr->SetForceSolid(true);
-   visAttr->SetForceAuxEdgeVisible(true);
-   teflonLogic->SetVisAttributes(visAttr);
-   return teflonLogic;
-}
-
-G4LogicalVolume* DetectorConstruction::ConstructSodiumCrystal()
-{
-   G4double rMin = 0;
-   G4double rMax = 3. *cm;
-   G4double halfLength = 5. *cm; 
-   G4Tubs* crystal = new G4Tubs("crystal", rMin, rMax, halfLength, 0*deg, 360*deg);
-   
-   G4Material* nai = man->FindOrBuildMaterial("G4_SODIUM_IODIDE");
-
-   
-   G4LogicalVolume* naiLogic = new G4LogicalVolume(crystal, nai,"naiLogic");
-   G4VisAttributes* naiVis = new G4VisAttributes(G4Colour(1,1,0));
-   naiVis->SetForceSolid(true);
-   naiVis->SetForceAuxEdgeVisible(true);
-   naiLogic->SetVisAttributes(naiVis);
-   return naiLogic;
 }
 
 void DetectorConstruction::ConstructSDandField() 
