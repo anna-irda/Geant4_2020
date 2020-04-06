@@ -166,7 +166,7 @@ void DetectorConstruction::ConstructNaIDet()
 //   new G4PVPlacement(rot2, naiDetPos2, aluLogic, "aluPhys", cylinderLogVol, 0, 1);
    
    int noDetectors = 36;
-   double angle = 360./noDetectors*deg;	
+   double angle = 360./noDetectors*deg;
    for(int i = 0; i !=36; ++i)
    {
        G4RotationMatrix* rot = new G4RotationMatrix();
