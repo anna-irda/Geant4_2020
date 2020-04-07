@@ -30,7 +30,6 @@ void HumanFantom::ConstructFantom(double heigh, double radius)
 
 	//G4ThreeVector pos(0,0,0);    
 	//new G4PVPlacement(0, pos, fantomLogVol, "fantom", worldLogic, 0, 0);
-
 }
 
 G4Material* HumanFantom::MakeWater()
@@ -42,7 +41,6 @@ G4Material* HumanFantom::MakeWater()
     water->AddElement(H, 2);
     water->AddElement(O, 1);
     return water;
-
 }
 
 void HumanFantom::ConstructSpine(double heigh)
@@ -64,7 +62,6 @@ void HumanFantom::ConstructSpine(double heigh)
    G4ThreeVector pos(0,10*cm,halfLength);
    new G4PVPlacement(0, pos, spineLogVol, "spinePhys", fantomLogVol, 0, 0);
 }
-
 
 void HumanFantom::Place(G4RotationMatrix *pRot, 
                         G4ThreeVector &tlate, 
