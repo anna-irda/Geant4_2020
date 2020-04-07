@@ -16,6 +16,7 @@
 #include "G4PSEnergyDeposit.hh"
 
 #include "HumanFantom.hh"
+#include "PET.hh"
 
 
 DetectorConstruction::DetectorConstruction()
@@ -82,53 +83,17 @@ void DetectorConstruction::ConstructHumanFantom()
 
 void DetectorConstruction::ConstructCylinder()
 {
-     G4Material* ppy = man->FindOrBuildMaterial("G4_POLYPROPYLENE");
-     G4double rMin = 40*cm;
-     G4double rMax = 55*cm;
-     G4double length = 15*cm;
-     G4Tubs* theCylinder = new G4Tubs("theCylinder", rMin, rMax, length/2, 0*deg, 360*deg);
-     cylinderLogVol = new G4LogicalVolume(theCylinder, ppy, "cylinderLogVol");
+   G4double rMin = 40 *cm;
+   G4double rMax = 55 *cm;
+   G4double length = 15 *cm;
+   G4double rad = 3.6 *cm;
+   G4double noDetectors = 36;
+   
+   PET *cylinder = new PET(rMin, rMax, length, rad, noDetectors);
 
-     G4VisAttributes* cylinderAtt = new G4VisAttributes(G4Colour(0.5,0.5,0.5, 0.7));
-     cylinderAtt->SetForceAuxEdgeVisible(true);
-     cylinderAtt->SetForceSolid(true);
-     cylinderLogVol->SetVisAttributes(cylinderAtt);
-
-     G4ThreeVector pos(0,0, 0);
-     new G4PVPlacement(0, pos, cylinderLogVol, "cylinderPhys", worldLogic,0,0);
-}
-
-//NaI
-//wysokość 10 cm
-//promień 3 cm
-//teflon 3 mm
-//aluminium 3 mm
-
-void DetectorConstruction::NaIDetector()
-{
-   G4double rMax1 = 3.6 *cm;
-   G4double rMax2 = 3.3 *cm;
-   G4double rMax3 = 3 *cm;
-   G4double halfLength1 = 5.6 *cm;
-   G4double halfLength2 = 5.3 *cm;
-   G4double halfLength3 = 5 *cm;
-   NaIDetector *detector = new NaIDetector(rMax1, rMax2, rMax3, halfLength1, halfLength2, halfLength3)
-
-   	G4RotationMatrix *pRot = new G4RotationMatrix();
-	detector->Place(0, pos, "detector", worldLogic, 0); 
-	
-   double ringRadius = 46.6*cm;
-	
-   int noDetectors = 36;
-   double angle = 360./noDetectors*deg;
-   for(int i = 0; i !=36; ++i)
-   {
-       G4RotationMatrix* rot = new G4RotationMatrix();
-       rot->rotateZ(angle*i);
-       rot->rotateX(90*deg);
-       G4ThreeVector detPos(ringRadius*sin(angle*i),ringRadius*cos(angle*i),0);
-       new G4PVPlacement(rot, detPos, aluLogic, "aluPhys", cylinderLogVol, 0, i);
-   }
+	G4ThreeVector pos(0,0,0); 
+	G4RotationMatrix *pRot = new G4RotationMatrix();
+	cylinder->Place(0, pos, "cylinder", worldLogic, 0); 
 }
 
 void DetectorConstruction::ConstructSDandField() 
