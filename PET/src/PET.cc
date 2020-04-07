@@ -59,7 +59,7 @@ G4LogicalVolume* PET::ConstructAluLayer()
    G4double rMax = 3.6 *cm;
    G4double halfLength = 5.6 *cm; 
    G4Tubs* aluSolid = new G4Tubs("aluSolid", rMin, rMax, halfLength, 0*deg, 360*deg);
-   
+
    G4Material* alu = new G4Material("aluminum", 2.7*g/cm3, 1);
    G4Element* Al = man->FindOrBuildElement("Al");
    alu->AddElement(Al, 1);
@@ -78,10 +78,9 @@ G4LogicalVolume* PET::ConstructTeflonLayer()
    G4double rMax = 3.3 *cm;
    G4double halfLength = 5.3 *cm; 
    G4Tubs* solid = new G4Tubs("solid", rMin, rMax, halfLength, 0*deg, 360*deg);
-   
+	
    G4Material* teflon = man->FindOrBuildMaterial("G4_TEFLON");
 
-   
    G4LogicalVolume* teflonLogic = new G4LogicalVolume(solid, teflon,"teflonLogic");
    G4VisAttributes* visAttr = new G4VisAttributes(G4Colour(1,1,1, 0.5));
    visAttr->SetForceSolid(true);
