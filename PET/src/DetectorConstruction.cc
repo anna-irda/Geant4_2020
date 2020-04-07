@@ -45,7 +45,6 @@ G4VPhysicalVolume* DetectorConstruction::Construct()
     G4VPhysicalVolume* worldPhys = ConstructWorld();
     ConstructHumanFantom();
     ConstructCylinder();
-    ConstructNaIDet();
     return worldPhys;
 }
 
@@ -86,10 +85,10 @@ void DetectorConstruction::ConstructCylinder()
    G4double rMin = 40 *cm;
    G4double rMax = 55 *cm;
    G4double length = 15 *cm;
-   G4double rad = 3.6 *cm;
+   G4double radius = 3.6 *cm;
    G4double noDetectors = 36;
    
-   PET *cylinder = new PET(rMin, rMax, length, rad, noDetectors);
+   PET *cylinder = new PET(rMin, rMax, length, radius, noDetectors);
 
 	G4ThreeVector pos(0,0,0); 
 	G4RotationMatrix *pRot = new G4RotationMatrix();
