@@ -19,6 +19,7 @@ class PET
     void ConstructCylinder(double r_minimum, double r_maximum, double length);
     void ConstructNaIDet(double radius, double NoOfDet);
     
+    G4NistManager* man;
     G4LogicalVolume* cylinderLogVol;
     G4LogicalVolume* ConstructAluLayer();
     G4LogicalVolume* ConstructTeflonLayer();
