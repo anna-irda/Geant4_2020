@@ -82,7 +82,6 @@ void DetectorConstruction::ConstructCylinder()
    G4double length = 15 *cm;
    G4double radius = 3.6 *cm;
    G4double noDetectors = 36;
-   
    PET *cylinder = new PET(rMin, rMax, length, radius, noDetectors);
 
 	G4ThreeVector pos(0,0,0); 
