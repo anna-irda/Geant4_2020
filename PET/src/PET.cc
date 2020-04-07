@@ -98,7 +98,6 @@ G4LogicalVolume* PET::ConstructSodiumCrystal()
    
    G4Material* nai = man->FindOrBuildMaterial("G4_SODIUM_IODIDE");
 
-   
    G4LogicalVolume* naiLogic = new G4LogicalVolume(crystal, nai,"naiLogic");
    G4VisAttributes* naiVis = new G4VisAttributes(G4Colour(1,1,0));
    naiVis->SetForceSolid(true);
