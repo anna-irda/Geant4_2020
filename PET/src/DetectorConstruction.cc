@@ -27,8 +27,6 @@ DetectorConstruction::DetectorConstruction()
     man = G4NistManager::Instance();
 }
 
-
-
 DetectorConstruction::~DetectorConstruction() 
 {
     if(worldLogic != 0L)
@@ -38,7 +36,6 @@ DetectorConstruction::~DetectorConstruction()
     if(cylinderLogVol != 0L)
         delete cylinderLogVol; 
 }
-
 
 G4VPhysicalVolume* DetectorConstruction::Construct()
 {
@@ -65,7 +62,6 @@ G4VPhysicalVolume* DetectorConstruction::ConstructWorld()
     //worldLogic->SetVisAttributes(G4VisAttributes::Invisible);
     G4VPhysicalVolume* worldPhys = new G4PVPlacement(0, G4ThreeVector(), worldLogic, "world", 0, false, 0);
     return worldPhys;
-
 }
 
 void DetectorConstruction::ConstructHumanFantom()
@@ -76,8 +72,7 @@ void DetectorConstruction::ConstructHumanFantom()
 
 	G4ThreeVector pos(0,0,0); 
 	G4RotationMatrix *pRot = new G4RotationMatrix();
-	fantom->Place(0, pos, "fantom", worldLogic, 0); 
-	
+	fantom->Place(0, pos, "fantom", worldLogic, 0); 	
 }
 
 void DetectorConstruction::ConstructCylinder()
