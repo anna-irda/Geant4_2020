@@ -1,3 +1,4 @@
 Propozycja projektu:
 
-Stanowisko do napromieniania wiązkami mieszanymi składające się z lampy RTG (190 kV) oraz źródła promieniowania alfa (Am-241). Źródło promieniotwórcze znajduje się w środku inkubatora, a lampa RTG pod inkubatorem.
+Stanowisko do napromieniania wiązkami mieszanymi składające się z lampy RTG (190 kV) oraz źródła promieniowania alfa (Am-241).
+Źródło promieniotwórcze znajduje się w środku inkubatora, a lampa RTG pod inkubatorem.
