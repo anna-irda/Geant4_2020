@@ -9,6 +9,10 @@
 #include "G4SystemOfUnits.hh"
 #include "G4SteppingManager.hh"
 #include "G4Step.hh"
+#include "G4Track.hh"
+#include "G4String.hh"
+#include "G4VPhysicalVolume.hh"
+#include <iostream>
 
 SteppingAction::SteppingAction():G4UserSteppingAction()
 {
@@ -26,13 +30,26 @@ void SteppingAction::UserSteppingAction(const G4Step* theStep)
     {
         auto secondaries = theStep -> GetSecondaryInCurrentStep();
         nrOfSec+=secondaries->size();
-        std::cout << nrOfSec << std::endl;      
+        //std::cout << nrOfSec << std::endl;      
     }
     /*if (secondaries->size()>0)
     {
         std::cout << "size" << secondaries->size();
         PrintStep(theStep);
     }*/
+
+    G4VPhysicalVolume *physVol = theTrack->GetVolume();
+    G4LogicalVolume* logVol = physVol->GetLogicalVolume();
+    G4Material* material = logVol->GetMaterial();
+    G4String materialName = material->GetName();
+
+    if(materialName =="G4_BONE_COMPACT_ICRU")
+    {
+     double eneDepInStep = theStep->GetTotalEnergyDeposit()/keV;
+     totalEnergyDep += eneDepInStep;
+    }
+
+     //PrintStep(theStep);
 }
 
 void SteppingAction::PrintStep(const G4Step* theStep)
