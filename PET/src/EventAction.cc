@@ -29,6 +29,3 @@ void EventAction::EndOfEventAction(const G4Event* anEvent)
     std::cout << SteppingAction::nrOfSec << std::endl; 
     SteppingAction::nrOfSec=0;
 }
-
-
-
