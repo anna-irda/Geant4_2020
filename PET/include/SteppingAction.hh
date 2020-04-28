@@ -16,7 +16,7 @@ class SteppingAction : public G4UserSteppingAction
     virtual ~SteppingAction();
     virtual void UserSteppingAction(const G4Step*); 
   private:
-    
+    void PrintStep(const G4Step* theStep);
 };
 
 #endif
