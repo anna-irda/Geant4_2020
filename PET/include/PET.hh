@@ -18,6 +18,7 @@ class PET
     private:
     void ConstructCylinder(double r_minimum, double r_maximum, double length);
     void ConstructNaIDet(double radius, double NoOfDet);
+    void PET::ConstructSDandField()
     
     G4NistManager* man;
     G4LogicalVolume* cylinderLogVol;
