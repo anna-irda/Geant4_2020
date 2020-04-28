@@ -67,8 +67,8 @@ void SteppingAction::PrintStep(const G4Step* theStep)
               << " particle: " << particleName
               << " process: " << processName
               << " kinetic energy: " << energy/MeV
-		          << " delta en: " << deltaEn
-		          << " voulme name: " << volumeName << std::endl;
+	      << " delta en: " << deltaEn
+	      << " voulme name: " << volumeName << std::endl;
 
 }
 int SteppingAction::nrOfSec=0;
