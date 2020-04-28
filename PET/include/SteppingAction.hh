@@ -14,8 +14,9 @@ class SteppingAction : public G4UserSteppingAction
   public:
     SteppingAction();
     virtual ~SteppingAction();
-    virtual void UserSteppingAction(const G4Step*); 
-    static int nrOfSec;
+    virtual void UserSteppingAction(const G4Step*);
+    static double totalEnergyDep;
+    //static int nrOfSec;
   private:
     void PrintStep(const G4Step* theStep);
 };
