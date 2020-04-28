@@ -71,4 +71,4 @@ void SteppingAction::PrintStep(const G4Step* theStep)
 	      << " voulme name: " << volumeName << std::endl;
 
 }
-int SteppingAction::nrOfSec=0;
+double SteppingAction::totalEnergyDep = 0;
