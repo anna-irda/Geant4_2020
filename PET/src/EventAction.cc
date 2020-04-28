@@ -7,11 +7,8 @@
 //
 #include "SteppingAction.hh"
 #include "EventAction.hh"
-#include "globals.hh"
 #include "G4SystemOfUnits.hh"
-#include "G4SDManager.hh"
-#include "G4THitsMap.hh"
-#include "SpineHit.hh"
+#include "globals.hh"
 
 EventAction::EventAction()
 {
