@@ -61,7 +61,7 @@ void PrimaryGeneratorAction::GenerateBackgroundIncident(G4Event* anEvent)
     
     G4ParticleDefinition* particle = particleTable->FindParticle("gamma");
     particleGun->SetParticleDefinition(particle);
-    particleGun->SetParticleEnergy(1461*keV);
+    particleGun->SetParticleEnergy(1460*keV);
     particleGun->SetParticleMomentumDirection(GenerateIsotropicDirection());
     particleGun->GeneratePrimaryVertex(anEvent);
 }
